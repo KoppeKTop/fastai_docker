@@ -11,7 +11,7 @@ services:
       - /etc/passwd:/etc/passwd:ro
       - ./fastai:/fastai
       - ./data:/fastai/user_data
-    user: $USER
+    command: ['/usr/bin/start', $USER]
     restart: unless-stopped
     logging:
       options:

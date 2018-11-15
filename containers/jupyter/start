@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+import pathlib
+from os import path
+from shutil import copyfile
+import sys
+from subprocess import call
+user_name = sys.argv[1]
+src_config_path = '/opt/jupyter_notebook_config.py'
+jupyter_path = path.expanduser('~{}/.jupyter'.format(user_name))
+dst_config_path = path.join(jupyter_path, path.basename(src_config_path))
+pathlib.Path(jupyter_path).mkdir(parents=True, exist_ok=True)
+call(['chown', '-R', user_name, path.expanduser('~{}'.format(user_name))])
+call(['chown', '-R', user_name, '/fastai/user_data'])
+copyfile(src_config_path, dst_config_path)
+call(['gosu', user_name, 'jupyter', 'notebook', '--config', '/opt/jupyter_notebook_config.py'])
