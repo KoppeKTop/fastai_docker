@@ -9,6 +9,7 @@ services:
     volumes:
       - /etc/group:/etc/group:ro
       - /etc/passwd:/etc/passwd:ro
+      - /etc/shadow:/etc/shadow:ro
       - ./fastai:/fastai
       - ./data:/fastai/user_data
     command: ['/usr/bin/start', $USER]
